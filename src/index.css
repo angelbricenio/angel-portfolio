@@ -1,0 +1,151 @@
+/* Minimal Mocha palette */
+:root {
+  --milky-beige: #f2eadb;
+  --light-oat: #e4d7c5;
+  --mocha-taupe: #c7b09a;
+  --soft-coffee: #a68a72;
+  --deep-mocha: #6f5846;
+
+  /* Semantic tokens — light mode */
+  --bg: var(--milky-beige);
+  --bg-alt: var(--light-oat);
+  --ink: var(--deep-mocha);
+  --mute: #5a4738; /* darker deep-mocha derivative for AA body contrast on beige */
+  --accent: var(--soft-coffee);
+  --line: var(--mocha-taupe);
+  --btn-bg: var(--deep-mocha);
+  --btn-fg: var(--milky-beige);
+  --header-bg: color-mix(in srgb, var(--milky-beige) 88%, transparent);
+  --shadow: 0 10px 30px color-mix(in srgb, var(--deep-mocha) 12%, transparent);
+  --radius: 14px;
+  --wrap: 1160px;
+  --header-h: 64px;
+}
+
+:root[data-theme='dark'] {
+  --bg: #4a3a2f; /* darker deep-mocha for dark surfaces */
+  --bg-alt: var(--deep-mocha);
+  --ink: var(--milky-beige);
+  --mute: var(--light-oat);
+  --accent: var(--mocha-taupe);
+  --line: color-mix(in srgb, var(--mocha-taupe) 55%, var(--deep-mocha));
+  --btn-bg: var(--milky-beige);
+  --btn-fg: var(--deep-mocha);
+  --header-bg: color-mix(in srgb, #4a3a2f 88%, transparent);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'League Spartan', 'DM Sans', sans-serif;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(100% - 48px, var(--wrap));
+  margin-inline: auto;
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    width: min(100% - 32px, var(--wrap));
+  }
+}
+
+.reveal {
+  opacity: 0.001; /* keep a tiny opacity so layout/IO still work; never fully hide cards */
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Always show work cards even if reveal observer is late */
+.work-grid.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
